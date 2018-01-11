@@ -1,0 +1,9 @@
+dj-database-url==0.4.1
+Django==1.9.6
+django-widget-tweaks==1.4.1
+gunicorn==19.4.5
+model-mommy==1.2.6
+pytz==2017.3
+six==1.11.0
+view==0.1
+whitenoise==3.2

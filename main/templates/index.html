@@ -1,0 +1,113 @@
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Elo do Chris</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.css">
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<script>
+    {#    setTimeout(function(){#}
+    {#    $('#mainSection').removeClass('hero is-light is-fullheight').addClass('hero is-dark is-fullheight');#}
+    {#},
+        5000
+    )
+    ;
+    #}
+</script>
+<section id="mainSection" class="hero is-primary is-bold is-fullheight">
+    <!-- Hero head: will stick at the top -->
+    <div class="hero-head">
+        <br><br>
+        <hr>
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    <p class="heading">Jogos</p>
+                    <p class="title">0</p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered">
+                <div>
+                    <p class="heading">Vitórias</p>
+                    <p class="title">0</p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered">
+                <div>
+                    <p class="heading">Amigos Perdidos</p>
+                    <p class="title">0</p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered">
+                <div>
+                    <p class="heading">Evolução</p>
+                    <p class="title">100%</p>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <hr>
+
+    <!-- Hero content: will be in the middle -->
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            <h1 class="title">
+                Seu elo atual é:
+            </h1>
+            <h2 class="subtitle">
+                {{ eloUsuario.elo }}
+            </h2>
+            <img class="subtitle"
+                 src='{{ eloUsuario.elo.image }}'
+                 alt="">
+            <h2 class="subtitle">Pontos: {{ eloUsuario.pontos }}</h2>
+            <progress class="progress is-dark is-large" value="{{ eloUsuario.pontos }}"
+                      max="100">{{ eloUsuario.pontos }}%
+            </progress>
+            <h2 class="subtitle">
+                {{ eloUsuario.elo.comentario }}
+            </h2>
+            {% if success %}
+                <div class="help is-sucess">
+                    Mensagem enviada com sucesso
+                </div>
+            {% endif %}
+
+            <hr>
+            <br>
+
+            <h1 class="title">Inserir pontos.</h1>
+            <form class="" action="{{ url_index }}" method="post">
+                {% csrf_token %}
+                    {% for field in form %}
+                        <div class="control">
+                            <div class="{% if field.errors %} fas fa-exclamation-triangle{% endif %}">
+                                <label for="{{ field.auto_id }}" class="label has-text-centered">{{ field.label }}</label>
+                                <div class="field">
+                                    {% render_field field class='input' %}
+                                    {% for error in field.errors %}
+                                        <span class="help is-danger">{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+            <br>
+                    <div class="">
+                        <div class="field">
+                            <button type="submit" class="button is-light">Enviar</button>
+                        </div>
+                    </div>
+            </form>
+
+        </div>
+    </div>
+</section>
+</body>
+</html>
