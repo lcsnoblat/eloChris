@@ -29,13 +29,13 @@
             <div class="level-item has-text-centered">
                 <div>
                     <p class="heading">Jogos</p>
-                    <p class="title">0</p>
+                    <p class="title">{{ eloUsuario.partidas_jogadas }}</p>
                 </div>
             </div>
             <div class="level-item has-text-centered">
                 <div>
                     <p class="heading">Vitórias</p>
-                    <p class="title">0</p>
+                    <p class="title">{{ eloUsuario.partidas_ganhas }}</p>
                 </div>
             </div>
             <div class="level-item has-text-centered">
@@ -82,28 +82,34 @@
             <hr>
             <br>
 
-            <h1 class="title">Inserir pontos.</h1>
+        </div>
+    </div>
+</section>
+<section id="mainSection" class="hero is-warning is-bold is-fullheight">
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            <h1 class="title">Terminou uma partida? Insira aqui os resultados</h1>
             <form class="" action="{{ url_index }}" method="post">
                 {% csrf_token %}
-                    {% for field in form %}
-                        <div class="control">
-                            <div class="{% if field.errors %} fas fa-exclamation-triangle{% endif %}">
-                                <label for="{{ field.auto_id }}" class="label has-text-centered">{{ field.label }}</label>
-                                <div class="field">
-                                    {% render_field field class='input' %}
-                                    {% for error in field.errors %}
-                                        <span class="help is-danger">{{ error }}</span>
-                                    {% endfor %}
-                                </div>
+                {% for field in form %}
+                    <div class="control">
+                        <div class="{% if field.errors %} fas fa-exclamation-triangle{% endif %}">
+                            <label for="{{ field.auto_id }}" class="label has-text-centered">{{ field.label }}</label>
+                            <div class="field">
+                                {% render_field field class='input' %}
+                                {% for error in field.errors %}
+                                    <span class="help is-danger">{{ error }}</span>
+                                {% endfor %}
                             </div>
                         </div>
-                    {% endfor %}
-            <br>
-                    <div class="">
-                        <div class="field">
-                            <button type="submit" class="button is-light">Enviar</button>
-                        </div>
                     </div>
+                {% endfor %}
+                <br>
+                <div class="">
+                    <div class="field">
+                        <button type="submit" class="button is-light">Enviar</button>
+                    </div>
+                </div>
             </form>
 
         </div>
